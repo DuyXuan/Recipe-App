@@ -1,0 +1,43 @@
+<div class="w-75 m-auto">
+  <div *ngIf="check() == true" class="mt-5 text-center">
+    <h2>nothing to buy here :)</h2>
+  </div>
+  <ng-container *ngIf="check() == false">
+    <div class="form-group row mt-5">
+      <div class="col-5">
+        <label class="font-weight-bold" for="">Name</label>
+        <input
+          [readOnly]="disableNameField()"
+          type="text"
+          name=""
+          class="form-control ingredientName"
+          [(ngModel)]="itemName"
+          (change)="sendDataToAdd()"
+        />
+      </div>
+      <div class="col-5">
+        <label class="font-weight-bold" for="">Amount</label>
+        <input
+          type="number"
+          name=""
+          class="form-control ingredientQuantity"
+          [(ngModel)]="itemAmount"
+          (change)="sendAmount(); sendDataToAdd()"
+        />
+      </div>
+    </div>
+    <router-outlet></router-outlet
+    ><button class="btn btn-primary" (click)="clear()">Clear</button>
+
+    <h2 class="mt-4 mb-4">Current Ingredient</h2>
+    <ng-container *ngFor="let item of ingredientList">
+      <input
+        (click)="fillCurrent(item.ingredientName, item.ingredientQuantity)"
+        type="text"
+        class="form-control mt-2"
+        [value]="item.ingredientName + '-' + item.ingredientQuantity"
+        readonly
+      />
+    </ng-container>
+  </ng-container>
+</div>

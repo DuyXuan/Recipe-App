@@ -1,0 +1,38 @@
+<ng-container *ngIf="getRecipe != null">
+  <div class="detail mt-4">
+    <img width="250px" [src]="getRecipe.imageUrl" alt="" />
+    <div class="name pt-2">
+      <h3>{{ getRecipe.name }}</h3>
+    </div>
+    <select
+      class="p-2 rounded btn-primary"
+      [(ngModel)]="option"
+      (change)="doOption()"
+    >
+      <option class="dropdown-item" value="" disabled selected hidden>
+        Manage Recipe
+      </option>
+      <option class="border bg-white text-dark" value="shopping">
+        to shopping list
+      </option>
+      <option class="border bg-white text-dark" value="edit">
+        edit recipe
+      </option>
+      <option class="border bg-white text-dark" value="delete">
+        delete recipe
+      </option>
+    </select>
+
+    <p class="pt-2">{{ getRecipe.description }}</p>
+    <div class="form-group">
+      <div class="form-group">
+        <ng-container *ngFor="let item of recipeData.ingredient"
+          ><input
+            disabled
+            type="text"
+            [value]="item.ingredientName + '-' + item.ingredientQuantity"
+            class="form-control mt-2"
+        /></ng-container>
+      </div>
+    </div></div
+></ng-container>

@@ -1,0 +1,30 @@
+<div class="row mt-4 mx-auto" style="width: 90%">
+  <div class="col-7">
+    <button class="btn btn-success" (click)="showForm()">New Recipe</button>
+
+    <ul class="list-group mt-3">
+      <ng-container *ngFor="let item of recipeList">
+        <li
+          class="list-group-item w-75 mt-2 border"
+          (click)="showDetail(item.id)"
+        >
+          <div class="p-1 row justify-content-between">
+            <div>
+              <h4 [innerHTML]="item.name"></h4>
+              <p [innerHTML]="item.description">{{ item.description }}</p>
+            </div>
+
+            <img width="150px" [src]="item.imageUrl" alt="" />
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+  <div class="col-5">
+    <div class="mt-4" *ngIf="showMessage() == true">
+      <h2>Please select a Recipe!</h2>
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>

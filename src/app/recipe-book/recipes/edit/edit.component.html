@@ -1,0 +1,104 @@
+<form
+  novalidate
+  [formGroup]="recipesForm"
+  (ngSubmit)="submitRecipe()"
+  action=""
+>
+  <button
+    [disabled]="recipesForm.invalid"
+    class="btn btn-success"
+    type="button"
+    (click)="update()"
+  >
+    Save
+  </button>
+  <button type="button" class="btn btn-danger ml-2" (click)="cancel()">
+    Cancel
+  </button>
+  <div class="form-group">
+    <label for="" class="form-label font-weight-bold">Name</label
+    ><input
+      class="form-control"
+      type="text"
+      name=""
+      id=""
+      formControlName="name"
+    />
+    <p
+      *ngIf="
+        recipesForm.get('name')?.hasError('required') &&
+        recipesForm.get('name').touched
+      "
+    >
+      Name is required
+    </p>
+  </div>
+  <div class="form-group">
+    <label for="" class="form-label font-weight-bold">Image URL</label
+    ><input
+      class="form-control"
+      type="text"
+      name="image"
+      id=""
+      formControlName="imageUrl"
+      [(ngModel)]="imageUrl"
+    />
+    <img width="200px" [src]="imageUrl" alt="" />
+    <p
+      *ngIf="
+        recipesForm.get('imageUrl')?.hasError('required') &&
+        recipesForm.get('imageUrl').touched
+      "
+    >
+      image is required
+    </p>
+  </div>
+
+  <div class="form-group">
+    <label for="" class="form-label font-weight-bold">Description</label
+    ><textarea
+      class="form-control"
+      name=""
+      id=""
+      cols="30"
+      rows="5"
+      formControlName="description"
+    ></textarea>
+    <p
+      *ngIf="
+        recipesForm.get('description')?.hasError('required') &&
+        recipesForm.get('description').touched
+      "
+    >
+      description is required
+    </p>
+  </div>
+
+  <div formArrayName="ingredient">
+    <div
+      class="form-froup"
+      *ngFor="let item of ingredient.controls; index as i"
+    >
+      <div [formGroupName]="i">
+        <input
+          type="text"
+          class="form-control col-6 mr-4 d-inline"
+          formControlName="ingredientName"
+        />
+
+        <input
+          type="number"
+          value="1"
+          class="form-control col-2 mr-4 d-inline"
+          formControlName="ingredientQuantity"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group mt-4">
+    <button type="button" class="btn btn-success" (click)="addIngredient()">
+      Add Ingredient
+    </button>
+  </div>
+</form>
